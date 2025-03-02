@@ -6,157 +6,7 @@
     <title>Developer by Md Tarek</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            color: white;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-        header {
-            background: #ff9800;
-            color: white;
-            padding: 10px;
-            border-radius: 10px 10px 0 0;
-        }
-        .earn-btn, .option-btn {
-            width: 100%;
-            background: linear-gradient(45deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 25px;
-            font-size: 18px;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .earn-btn::before, .option-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), transparent);
-            transition: 0.5s ease;
-        }
-        .earn-btn:hover::before, .option-btn:hover::before {
-            left: 100%;
-        }
-        .earn-btn:hover, .option-btn:hover {
-            background: linear-gradient(45deg, #2575fc, #6a11cb);
-            transform: scale(1.05);
-        }
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 2px solid #ddd;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        .bottom-nav button {
-            background: none;
-            border: none;
-            padding: 10px;
-            font-size: 18px;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .bottom-nav button:hover {
-            color: #ff9800;
-            transform: scale(1.1);
-        }
-        .page {
-            display: block;
-            padding: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #monetag-ad {
-            width: 100%;
-            height: 250px;
-            background-color: white;
-            text-align: center;
-            line-height: 250px;
-            margin-top: 20px;
-            border-radius: 5px;
-            color: black;
-        }
-        .box-system {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .box-system h3 {
-            margin-bottom: 10px;
-        }
-        .box-system progress {
-            width: 100%;
-            height: 20px;
-            border-radius: 10px;
-        }
-        .box-system button {
-            margin-top: 10px;
-        }
-        .profile-picture {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ff9800;
-            margin-bottom: 15px;
-        }
-        .profile-upload {
-            margin-top: 10px;
-        }
-        .profile-upload input {
-            display: none;
-        }
-        .profile-upload label {
-            background: #ff9800;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .profile-upload label:hover {
-            background: #e65100;
-        }
-        .reward-text {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #ffcc00;
-        }
+        /* আপনার CSS স্টাইল এখানে রাখুন */
     </style>
 </head>
 <body>
@@ -239,22 +89,19 @@
         let adTimer;
         let isAdRunning = false;
 
-        // তারিখ চেক করার জন্য একটি ফাংশন যোগ করুন
         function checkDateReset() {
             const today = new Date().toDateString();
             const lastAdDate = localStorage.getItem("lastAdDate");
 
             if (lastAdDate !== today) {
-                // তারিখ পরিবর্তন হলে, adsToday রিসেট করুন
-                localStorage.setItem("adsToday", 50);
+                localStorage.setItem("adsToday", 0);
                 localStorage.setItem("lastAdDate", today);
-                adsToday = 50;
+                adsToday = 0;
             }
         }
 
-        // DOMContentLoaded ইভেন্টে checkDateReset ফাংশন কল করুন
         document.addEventListener("DOMContentLoaded", function () {
-            checkDateReset(); // তারিখ চেক করুন এবং প্রয়োজন হলে রিসেট করুন
+            checkDateReset();
             document.getElementById("balance").innerText = `$${balance.toFixed(2)}`;
             document.getElementById("dailyAds").innerText = `${adsToday}/${dailyLimit}`;
             document.getElementById("boxStatus").innerText = `Ads Watched: ${adsWatched}/50`;
@@ -310,7 +157,7 @@
             adTimer = setTimeout(() => {
                 if (adWindow && !adWindow.closed) {
                     alert("✅ You watched the ad, but no money will be given! Only the ad count is updated.");
-                    countAd(); // Count the ad but do not add balance
+                    countAd();
                     adWindow.close();
                 } else {
                     alert("❌ You did not complete watching the ad!");
@@ -318,17 +165,16 @@
                 isAdRunning = false;
             }, 9000);  // 9 seconds for the ad
         }
+
         function countAd() {
             adsToday++;
             adsWatched++;
 
             localStorage.setItem("adsToday", adsToday);
             localStorage.setItem("adsWatched", adsWatched);
-            localStorage.setItem("balance", balance); // No money added, just count the ad
             document.getElementById("dailyAds").innerText = `${adsToday}/${dailyLimit}`;
             document.getElementById("boxStatus").innerText = `Ads Watched: ${adsWatched}/50`;
 
-            // Update the progress for the box system
             updateBoxProgress();
         }
 
@@ -343,7 +189,7 @@
         }
 
         function unlockBox() {
-            balance += 0.1; // Add $0.1 for unlocking the box
+            balance += 0.1;
             localStorage.setItem("balance", balance);
             document.getElementById("balance").innerText = `$${balance.toFixed(2)}`;
             alert("🎁 Box Unlocked! You earned $0.1.");
@@ -387,14 +233,14 @@
         function uploadProfilePicture(event) {
             const file = event.target.files[0];
             if (file) {
-                if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                if (file.size > 2 * 1024 * 1024) {
                     alert("File size should be less than 2MB.");
                     return;
                 }
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     document.getElementById("profilePicture").src = e.target.result;
-                    localStorage.setItem("profilePicture", e.target.result); // Save profile picture to localStorage
+                    localStorage.setItem("profilePicture", e.target.result);
                 };
                 reader.readAsDataURL(file);
             }
@@ -424,4 +270,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
