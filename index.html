@@ -239,8 +239,22 @@
         let adTimer;
         let isAdRunning = false;
 
-        // Initialize page on load
+        // তারিখ চেক করার জন্য একটি ফাংশন যোগ করুন
+        function checkDateReset() {
+            const today = new Date().toDateString();
+            const lastAdDate = localStorage.getItem("lastAdDate");
+
+            if (lastAdDate !== today) {
+                // তারিখ পরিবর্তন হলে, adsToday রিসেট করুন
+                localStorage.setItem("adsToday", 50);
+                localStorage.setItem("lastAdDate", today);
+                adsToday = 50;
+            }
+        }
+
+        // DOMContentLoaded ইভেন্টে checkDateReset ফাংশন কল করুন
         document.addEventListener("DOMContentLoaded", function () {
+            checkDateReset(); // তারিখ চেক করুন এবং প্রয়োজন হলে রিসেট করুন
             document.getElementById("balance").innerText = `$${balance.toFixed(2)}`;
             document.getElementById("dailyAds").innerText = `${adsToday}/${dailyLimit}`;
             document.getElementById("boxStatus").innerText = `Ads Watched: ${adsWatched}/50`;
@@ -302,9 +316,8 @@
                     alert("❌ You did not complete watching the ad!");
                 }
                 isAdRunning = false;
-            }, 7000);  // 8 seconds for the ad
+            }, 9000);  // 9 seconds for the ad
         }
-
         function countAd() {
             adsToday++;
             adsWatched++;
